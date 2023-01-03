@@ -7,15 +7,15 @@ class App extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            income: 0n,
-            savings: 0n,
-            investments: 0n,
-            expenses: 0n,
-            budget: 0n
+            income: 0,
+            savings: 0,
+            investments: 0,
+            expenses: 0,
+            budget: 0
         }
     }
 
-    updateIncome(newIncome) {
+    updateIncome = (newIncome) => {
         const { savings, investments, expenses } = this.state
         this.setState({
             income: newIncome,
@@ -23,7 +23,7 @@ class App extends Component {
         })
     }
 
-    updateSavings(newSavings) {
+    updateSavings = (newSavings) => {
         const { income, investments, expenses } = this.state
         this.setState({
             savings: newSavings,

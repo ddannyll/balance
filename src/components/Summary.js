@@ -3,13 +3,14 @@ import { Component } from "react";
 class Summary extends Component {
     render() {
         const { income, savings, investments, expenses, budget } = this.props.summary
+        console.log(this.props.summary);
         // all currency stored in cents as BigInt 
         const currencyFormatter = new Intl.NumberFormat(undefined, {
             style: 'currency',
             currency: 'USD' // TODO: option to select currency tyle for now keep USD
         })
-        const formatCurrency = (cents) => {
-            return currencyFormatter.formatToParts(Number(cents) / 100).slice(1).map(part => part.value).join('')
+        const formatCurrency = (dollars) => {
+            return currencyFormatter.formatToParts(dollars).slice(1).map(part => part.value).join('')
         }
         return (
             <div>
