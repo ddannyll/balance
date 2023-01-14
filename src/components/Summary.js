@@ -1,36 +1,33 @@
 import { Component } from "react";
+import './Summary.css'
 
 class Summary extends Component {
     render() {
         const { income, savings, investments, expenses, budget } = this.props.summary
-        console.log(this.props.summary);
         // all currency stored in cents as BigInt 
-        const currencyFormatter = new Intl.NumberFormat(undefined, {
-            style: 'currency',
-            currency: 'USD' // TODO: option to select currency tyle for now keep USD
-        })
+
         const formatCurrency = (dollars) => {
-            return currencyFormatter.formatToParts(dollars).slice(1).map(part => part.value).join('')
+            return Number(dollars.toFixed(2)).toLocaleString('en', {minimumFractionDigits:2})
         }
         return (
-            <div>
-                <div className="incomeSummary">
+            <div className="summary">
+                <div className="summaryItem incomeSummary">
                     <h3>{formatCurrency(income)}</h3>
                     <h4>Income</h4>
                 </div>
-                <div className="savings">
+                <div className="summaryItem savings">
                     <h3>{formatCurrency(savings)}</h3>
-                    <h4>Income</h4>
+                    <h4>Savings</h4>
                 </div>
-                <div className="investments">
+                <div className="summaryItem investments">
                     <h3>{formatCurrency(investments)}</h3>
                     <h4>Investments</h4>
                 </div>
-                <div className="expenses">
+                <div className="summaryItem expenses">
                     <h3>{formatCurrency(expenses)}</h3>
                     <h4>Expenses</h4>
                 </div>
-                <div className="budget">
+                <div className="summaryItem budget">
                     <h3>{formatCurrency(budget)}</h3>
                     <h4>Budget</h4>
                 </div>

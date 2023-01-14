@@ -1,0 +1,11 @@
+.summary {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.summaryItem {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid black;
+    flex: 1 1 0;
+}

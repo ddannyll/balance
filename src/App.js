@@ -2,6 +2,7 @@ import { Component } from "react";
 import Summary from "./components/Summary";
 import Income from "./components/Income";
 import './App.css'
+import 'destyle.css'
 
 class App extends Component {
     constructor(props) {
@@ -33,9 +34,11 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className="app">
                 <Summary summary = {this.state}/>
-                <Income updateIncome = {this.updateIncome}/>
+                <div className="card">
+                    <Income updateIncome = {this.updateIncome}/>
+                </div>
             </div>
         )
     }
