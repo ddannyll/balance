@@ -1,6 +1,5 @@
 import { Component } from "react";
-import Cleave from 'cleave.js/react';
-import './Income.css'
+import LabelledInput from "./LabelledInput";
 
 class Income extends Component {
     #incomeTypes
@@ -19,7 +18,6 @@ class Income extends Component {
         this.setState({
             [incomeType]: value
         }, () => {
-            console.log(this.state);
             const { primaryIncome, otherIncome } = this.state
             this.props.updateIncome(primaryIncome + otherIncome)
         })
@@ -29,21 +27,12 @@ class Income extends Component {
         let incomeNodes = []
         this.#incomeTypes.forEach((incomeType) => {
             incomeNodes.push(
-                <label key={incomeType} htmlFor={incomeType}>
-                    {incomeType.replace(/([A-Z])/, ' $1').replace(/^./, c => c.toUpperCase())}
-                    <Cleave
-                        data-for={incomeType} 
-                        placeholder='$0.00' 
-                        options={{
-                            numeral:true,
-                            numeralPositiveOnly: true,
-                            prefix:'$',
-                            rawValueTrimPrefix:true,
-                            noImmediatePrefix: true
-                        }}
-                        onChange={this.handleChange}
-                    />
-                </label>
+                <LabelledInput 
+                    key={incomeType}
+                    for={incomeType}
+                    label={incomeType.replace(/([A-Z])/, ' $1').replace(/^./, c => c.toUpperCase())}
+                    handleChange={this.handleChange}
+                />
             )
         })
 

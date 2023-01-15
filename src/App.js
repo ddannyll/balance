@@ -1,8 +1,10 @@
 import { Component } from "react";
 import Summary from "./components/Summary";
 import Income from "./components/Income";
+import Savings from "./components/Savings";
 import './App.css'
 import 'destyle.css'
+import LabelledInput from "./components/LabelledInput";
 
 class App extends Component {
     constructor(props) {
@@ -32,12 +34,24 @@ class App extends Component {
         })
     }
 
+    updateInvestments = (newInvestments) => {
+        const {income, savings, expenses} = this.state
+        this.setState({
+            investments: newInvestments,
+            budget: income - savings - newInvestments, expenses
+        })
+    }
+
     render() {
         return (
             <div className="app">
                 <Summary summary = {this.state}/>
                 <div className="card">
                     <Income updateIncome = {this.updateIncome}/>
+                    <Savings updateSavings = {this.updateSavings}/>
+                    <LabelledInput label='Investments' handleChange={e => this.updateInvestments(Number(e.target.rawValue))}/>
+
+
                 </div>
             </div>
         )
