@@ -2,6 +2,7 @@
     color: var(--other-color);
 }
 
+
 .buttonsContainer {
     margin-top: 40px;
     font-size: 2rem;
@@ -16,6 +17,10 @@
     width: 100px;
     height: 60px;
     transition: 0.15s;
+}
+
+.buttonsContainer > *:hover {
+    transform: scale(1.1);
 }
 
 
