@@ -10,7 +10,7 @@ import './App.css'
 class App extends Component {
     constructor(props) {
         super(props)
-        this.state = {
+        this.state = JSON.parse(window.localStorage.getItem('App')) || {
             income: 0,
             savings: 0,
             investments: 0,
@@ -19,12 +19,16 @@ class App extends Component {
         }
     }
 
+    storeState = () => {
+        window.localStorage.setItem('App', JSON.stringify(this.state))
+    }
+
     updateIncome = (newIncome) => {
         const { savings, investments, expenses } = this.state
         this.setState({
             income: newIncome,
             budget: newIncome - savings - investments - expenses
-        })
+        }, this.storeState)
     }
 
     updateSavings = (newSavings) => {
@@ -32,7 +36,7 @@ class App extends Component {
         this.setState({
             savings: newSavings,
             budget: income - newSavings - investments - expenses
-        })
+        }, this.storeState)
     }
 
     updateInvestments = (newInvestments) => {
@@ -40,7 +44,7 @@ class App extends Component {
         this.setState({
             investments: newInvestments,
             budget: income - savings - newInvestments - expenses
-        })
+        }, this.storeState)
     }
 
     updateExpenses = (newExpenses) => {
@@ -48,7 +52,7 @@ class App extends Component {
         this.setState({
             expenses: newExpenses,
             budget: income - savings - investments - newExpenses
-        })
+        }, this.storeState)
     }
 
     render() {

@@ -10,7 +10,7 @@ import './Expenses.css'
 class Expenses extends Component {
     constructor(props) {
         super(props)
-        this.state = {
+        this.state = JSON.parse(window.localStorage.getItem('Expenses')) || {
             selectedGroup: 0,
             expenseGroups: ExpenseDefault
         }
@@ -33,7 +33,10 @@ class Expenses extends Component {
                 }
             ).concat(expenseGroups.slice(selectedGroupIndex + 1))
         }, 
-            () => this.props.updateExpenses(this.state.expenseGroups.reduce((prev, curr) => prev + curr.value, 0))
+            () => {
+                this.props.updateExpenses(this.state.expenseGroups.reduce((prev, curr) => prev + curr.value, 0))
+                window.localStorage.setItem('Expenses', JSON.stringify(this.state))
+            }
         )
     }
 

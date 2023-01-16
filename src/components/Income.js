@@ -5,7 +5,7 @@ class Income extends Component {
     #incomeTypes
     constructor(props) {
         super(props)
-        this.state = {
+        this.state = JSON.parse(window.localStorage.getItem('Income')) || {
             primaryIncome: 0,
             otherIncome: 0
         }
@@ -20,6 +20,7 @@ class Income extends Component {
         }, () => {
             const { primaryIncome, otherIncome } = this.state
             this.props.updateIncome(primaryIncome + otherIncome)
+            window.localStorage.setItem('Income', JSON.stringify(this.state))
         })
     }
 
@@ -28,6 +29,7 @@ class Income extends Component {
         this.#incomeTypes.forEach((incomeType) => {
             incomeNodes.push(
                 <LabelledInput 
+                    value={this.state[incomeType]}
                     key={incomeType}
                     for={incomeType}
                     label={incomeType.replace(/([A-Z])/, ' $1').replace(/^./, c => c.toUpperCase())}
