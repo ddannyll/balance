@@ -8,3 +8,7 @@ A web application used to manage monthly finances!
 - JS
 - CSS
 - React
+
+## Improvements for further iterations: 
+- Custom expense button
+- Colour matching for doughnut chart and expense tab
