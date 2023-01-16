@@ -15,6 +15,7 @@ label input {
     padding: 0.75rem;
     text-align: end;
     color: white;
+    transition: 0.1s;
 }
 
 label input:focus {
