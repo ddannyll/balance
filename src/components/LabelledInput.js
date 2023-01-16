@@ -9,7 +9,7 @@ class LabelledInput extends Component {
 
     render() {
         return (
-            <label htmlFor="">
+            <label>
                 <p>
                     {this.props.label}
                 </p>
