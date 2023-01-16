@@ -40,12 +40,11 @@
     padding: 20px 0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     font-weight: 300;
 }
 
 .chartContainer {
-    width: 200px;
+    width: 180px;
 }
 
 form.customExpense {
