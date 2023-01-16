@@ -12,6 +12,7 @@ class LabelledInput extends Component {
             <label htmlFor="">
                 {this.props.label}
                 <Cleave
+                    value={this.props.value}
                     data-for={this.props.for} 
                     placeholder='$0.00' 
                     options={{

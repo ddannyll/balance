@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Expenses from "./components/Expenses";
 import Summary from "./components/Summary";
 import Income from "./components/Income";
 import Savings from "./components/Savings";
@@ -51,7 +52,7 @@ class App extends Component {
                     <Savings updateSavings = {this.updateSavings}/>
                     <LabelledInput label='Investments' handleChange={e => this.updateInvestments(Number(e.target.rawValue))}/>
 
-
+                    <Expenses />
                 </div>
             </div>
         )
