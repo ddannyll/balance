@@ -5,9 +5,24 @@ label {
     color: rgba(255, 255, 255, 0.6);
     align-items: center;
     cursor: pointer;
+    position: relative;
 }
 
+label button.delete {
+    position: absolute;
+    padding: 0.75rem;
+    right: -35px;
+    opacity: 0;
+    transition: 0.15s;
+}
 
+label:hover button.delete {
+    opacity: 1;
+}
+
+label button.delete:hover {
+    color: rgb(199, 93, 93);
+}
 
 label input {
     width: min(100%, 300px);

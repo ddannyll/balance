@@ -2,8 +2,8 @@ import { Component } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import LabelledInput from "./LabelledInput";
 import ExpenseDefault from "../ExpenseDefault";
-import 'chart.js/auto';
 import { Doughnut } from "react-chartjs-2";
+import 'chart.js/auto';
 import './Expenses.css'
 
 
@@ -16,7 +16,10 @@ class Expenses extends Component {
         }
     }
 
-            
+    updateCallback = () => {
+        this.props.updateExpenses(this.state.expenseGroups.reduce((prev, curr) => prev + curr.value, 0))
+        window.localStorage.setItem('Expenses', JSON.stringify(this.state))
+    }
 
     handleChange = (selectedGroupIndex, itemIndex, updatedValue) => {
         const {expenseGroups} = this.state
@@ -32,16 +35,52 @@ class Expenses extends Component {
                     value: selectedGroup.value - selectedGroup.items[itemIndex].value + updatedValue
                 }
             ).concat(expenseGroups.slice(selectedGroupIndex + 1))
-        }, 
-            () => {
-                this.props.updateExpenses(this.state.expenseGroups.reduce((prev, curr) => prev + curr.value, 0))
-                window.localStorage.setItem('Expenses', JSON.stringify(this.state))
-            }
-        )
+        }, this.updateCallback)
     }
 
     selectGroup = (index) => {
        this.setState({selectedGroup: index})
+    }
+
+    deleteCustomExpense = (groupIndex, itemIndex) => {
+        const {expenseGroups} = this.state
+        const groupToDeleteFrom = this.state.expenseGroups[groupIndex]
+        const items = groupToDeleteFrom.items
+        
+        this.setState({
+            expenseGroups: expenseGroups.slice(0, groupIndex).concat(
+                {
+                    ...groupToDeleteFrom,
+                    items: items.slice(0, itemIndex).concat(items.slice(itemIndex + 1)),
+                    value: groupToDeleteFrom.value - items[itemIndex].value
+                }
+            ).concat(expenseGroups.slice(groupIndex + 1))
+        }, this.updateCallback)
+    }
+
+    createCustomExpense = (groupIndex, expenseName) => {
+        const {expenseGroups} = this.state
+        const groupToAppend = this.state.expenseGroups[groupIndex]
+
+        // check if label is unique since react requires unique keys (labels used as keys)
+        console.log(groupToAppend.items);
+        if (groupToAppend.items.some(item => item.label === expenseName)) {
+            alert('Label must be unique!')
+            return
+        }
+        
+        this.setState({
+            expenseGroups: expenseGroups.slice(0, groupIndex).concat(
+                {
+                    ...groupToAppend,
+                    items: groupToAppend.items.concat({
+                        label: expenseName,
+                        value: 0,
+                        custom: true
+                    })
+                }
+            ).concat(expenseGroups.slice(groupIndex + 1))
+        }, this.updateCallback)
     }
 
     render() {
@@ -62,10 +101,12 @@ class Expenses extends Component {
         const labelledInputs = expenseGroups[selectedGroup].items.map((item, index) => {
             return (
                 <LabelledInput
-                    key={`${selectedGroup}:${index}`}
+                    key={`${selectedGroup}:${item.label}`}
                     label={item.label}
                     value={item.value} 
                     handleChange={(e) => {this.handleChange(selectedGroup, index, Number(e.target.rawValue))}}
+                    deleteable={item.custom}
+                    delete={() => {this.deleteCustomExpense(selectedGroup, index)}}
                 />
             )
         })
@@ -131,6 +172,18 @@ class Expenses extends Component {
                     </div>
                 </div>
                 {labelledInputs}
+
+                <form className="customExpense" onSubmit={(e) => {
+                    e.preventDefault()
+                    if (e.target[0].value === '') {
+                        return
+                    }
+                    this.createCustomExpense(selectedGroup, e.target[0].value)
+                    e.target[0].value = ''
+                }}>
+                    <input placeholder="Enter Custom Expense" type="text" />
+                    <button>Add Expense</button>
+                </form>
             </div>
         )
     }

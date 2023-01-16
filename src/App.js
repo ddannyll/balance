@@ -62,7 +62,7 @@ class App extends Component {
                 <div className="card">
                     <div className="cardHeader">
                         <h2>Balance</h2>
-                        <button className='clearBtn' onClick={() => {window.localStorage.clear(); location.reload()}}>Clear All</button>
+                        <button className='clearBtn' onClick={() => {window.localStorage.clear(); location.reload()}}>Reset</button>
                     </div>
                     <Income updateIncome = {this.updateIncome}/>
                     <Savings updateSavings = {this.updateSavings}/>

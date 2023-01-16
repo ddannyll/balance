@@ -10,9 +10,9 @@ class LabelledInput extends Component {
     render() {
         return (
             <label>
-                <p>
+                <div>
                     {this.props.label}
-                </p>
+                </div>
                 <Cleave
                     value={this.props.value === 0 ? null : this.props.value}
                     data-for={this.props.for} 
@@ -26,6 +26,7 @@ class LabelledInput extends Component {
                     }}
                     onChange={this.props.handleChange}
                 />
+                {this.props.deleteable ? <button className="delete" onClick={this.props.delete}>✖</button> : null}
             </label>
         )
     }

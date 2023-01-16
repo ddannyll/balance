@@ -48,7 +48,28 @@
     width: 200px;
 }
 
+form.customExpense {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 0.75rem 0;
+}
 
+form.customExpense input:focus {
+    outline: none;
+}
+
+form.customExpense button:hover {
+    color: white;
+}
+
+form.customExpense button {
+    transition: 0.1s;
+}
+
+form.customExpense input {
+    width: 50%;
+}
 
 
 @media (max-width: 600px) {
