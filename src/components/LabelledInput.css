@@ -1,4 +1,22 @@
 label {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 1rem 0;
+    color: rgba(255, 255, 255, 0.6)
+}
+
+label > p {
+    cursor: auto;
+}
+
+label input {
+    width: min(100%, 300px);
+    justify-self: end;
+    padding: 0.75rem;
+    text-align: end;
+    color: white;
+}
+
+label input:focus {
+    outline: 3px solid var(--other-color);
 }

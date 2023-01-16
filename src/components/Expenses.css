@@ -1,3 +1,55 @@
 .selected {
-    color: red;
+    color: var(--other-color);
 }
+
+.buttonsContainer {
+    margin-top: 40px;
+    font-size: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.buttonsContainer > * {
+    text-align: center;
+    width: 100px;
+    height: 60px;
+}
+
+
+.groupSummary h2 {
+    font-size: 1.5rem;
+    line-height: 2;
+    color: var(--other-color);
+    
+}
+
+.groupSummary h3 {
+    font-size: 1.5rem;
+    line-height: 2;
+}
+
+.groupSummary {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 300;
+}
+
+.chartContainer {
+    width: 200px;
+}
+
+
+
+
+@media (max-width: 600px) {
+
+    .groupSummary {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+

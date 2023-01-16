@@ -1,8 +1,10 @@
 import { Component } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid, regular, brands, icon } from '@fortawesome/fontawesome-svg-core/import.macro' 
-import './Expenses.css'
 import LabelledInput from "./LabelledInput";
+import ExpenseDefault from "../ExpenseDefault";
+import 'chart.js/auto';
+import { Doughnut } from "react-chartjs-2";
+import './Expenses.css'
 
 
 class Expenses extends Component {
@@ -10,73 +12,11 @@ class Expenses extends Component {
         super(props)
         this.state = {
             selectedGroup: 0,
-            expenseGroups: [
-                {
-                    label: 'Housing and Utilities',
-                    value: 0,
-                    icon: solid("house"),
-                    items: [
-                        {
-                            label: 'Rent',
-                            value: 0
-                        },
-                        {
-                            label: 'Electrical',
-                            value: 0
-                        }
-                    ]
-                },
-                {
-                    label: 'Transportation',
-                    value: 0,
-                    icon: solid("car"),
-                    items: [
-                        {
-                            label: 'Fuel',
-                            value: 0
-                        },
-                        {
-                            label: 'Train',
-                            value: 0
-                        }
-                    ]
-                },                
-                {
-                    label: 'Food',
-                    value: 0,
-                    icon: solid("utensils"),
-                    items: [
-                        {
-                            label: 'Groceries',
-                            value: 0
-                        },
-                        {
-                            label: 'Eating out',
-                            value: 0
-                        }
-                    ]
-                },                
-                {
-                    label: 'Health',
-                    value: 0,
-                    icon: solid("heart"),
-                    items: []
-                },                
-                {
-                    label: 'Debt',
-                    value: 0,
-                    icon: solid("credit-card"),
-                    items: []
-                },                
-                {
-                    label: 'Miscellaneous',
-                    value: 0,
-                    icon: solid("ellipsis"),
-                    items: []
-                },
-            ]
+            expenseGroups: ExpenseDefault
         }
     }
+
+            
 
     handleChange = (selectedGroupIndex, itemIndex, updatedValue) => {
         const {expenseGroups} = this.state
@@ -127,10 +67,57 @@ class Expenses extends Component {
             )
         })
 
+        const formatCurrency = (dollars) => {
+            return Number(dollars.toFixed(2)).toLocaleString('en', {minimumFractionDigits:2})
+        }
+
+        const chartData = {
+            labels: expenseGroups.map(group => group.label),
+            datasets: [{
+                data: expenseGroups.map(group => group.value),
+            }]
+          };
+
+        const chartOptions = {
+            responseive:true,
+            hoverOffset: 10,
+            layout: {
+                padding:20,
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => {
+                            return `$${context.raw}`
+                        },
+                        footer: (context) => {
+                            context = context[0]
+                            const percent = (context.raw / context.dataset.data.reduce((sum, curr) => sum + curr) * 100).toFixed(1)
+                            return `${percent}% of expenses`
+                        }
+                    }
+                }
+            }
+        }
+
 
         return (
             <div className="expenses">
-                {groupButtons}
+                <div className="buttonsContainer">
+                    {groupButtons}
+                </div>
+                <div className="groupSummary">
+                    <div className="labelTotalContainer">
+                        <h2 className="label">{expenseGroups[selectedGroup].label}</h2>
+                        <h3 className="total">${formatCurrency(expenseGroups[selectedGroup].value)}</h3>
+                    </div>
+                    <div className="chartContainer">
+                        <Doughnut className="chart" data={chartData} options={chartOptions}/>
+                    </div>
+                </div>
                 {labelledInputs}
             </div>
         )

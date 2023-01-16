@@ -7,8 +7,21 @@ class Summary extends Component {
         // all currency stored in cents as BigInt 
 
         const formatCurrency = (dollars) => {
-            return Number(dollars.toFixed(2)).toLocaleString('en', {minimumFractionDigits:2})
+            const absolute = Math.abs(dollars)
+            const formatted = Number(absolute.toFixed(2)).toLocaleString('en', {minimumFractionDigits:2})
+            if (dollars < 0) {
+                return `-$${formatted}`
+            } else {
+                return `$${formatted}`
+            }
         }
+
+        let budgetClassModifier
+        if (budget > 0) {
+            budgetClassModifier = 'positive'
+        } else if (budget < 0) {
+            budgetClassModifier = 'negative'
+        } 
         return (
             <div className="summary">
                 <div className="summaryItem incomeSummary">
@@ -27,7 +40,7 @@ class Summary extends Component {
                     <h3>{formatCurrency(expenses)}</h3>
                     <h4>Expenses</h4>
                 </div>
-                <div className="summaryItem budget">
+                <div className={`summaryItem budget ${budgetClassModifier}`}>
                     <h3>{formatCurrency(budget)}</h3>
                     <h4>Budget</h4>
                 </div>

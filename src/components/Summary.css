@@ -3,9 +3,22 @@
     flex-wrap: wrap;
 }
 
+
+.summary h4 {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.negative {
+    color: rgb(255, 81, 81);
+}
+
+.positive {
+    color:rgb(69, 220, 69);
+}
+
 .summaryItem {
     padding: 1rem;
     text-align: center;
-    border: 1px solid black;
     flex: 1 1 0;
+    line-height: 1.5;
 }

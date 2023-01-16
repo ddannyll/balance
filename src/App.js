@@ -59,7 +59,7 @@ class App extends Component {
                     <Income updateIncome = {this.updateIncome}/>
                     <Savings updateSavings = {this.updateSavings}/>
                     <LabelledInput label='Investments' handleChange={e => this.updateInvestments(Number(e.target.rawValue))}/>
-
+                    <h2>Expenses</h2>
                     <Expenses updateExpenses={this.updateExpenses}/>
                 </div>
             </div>

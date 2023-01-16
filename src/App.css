@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap');
 
+:root {
+    --background: #282626;
+    --dark: #181D31;
+    --dark-color: #678983;
+    --light-color: #E6DDC4;
+    --other-color: #fbd65d;
+}
+
+body {
+    background-color: var(--background);
+    color: whitesmoke;
+}
+
 .app {
     font-family: 'Poppins', sans-serif;
     display: flex;
@@ -9,12 +22,24 @@
 
 .summary {
     width: min(1000px, 90%);
+    position: sticky;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 
 .card {
-    padding: 25px;
-    border: 1px solid black;
-    margin-top: 50px;
+    padding: 25px 35px;
+    margin: 50px 0;
     width: min(800px, 90%);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.card > h2 {
+    font-size: 2rem;
+}
+
+label input {
+    background-color: var(--background);
 }
