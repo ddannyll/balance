@@ -1,11 +1,11 @@
+import 'destyle.css'
 import { Component } from "react";
 import Expenses from "./components/Expenses";
 import Summary from "./components/Summary";
 import Income from "./components/Income";
 import Savings from "./components/Savings";
-import './App.css'
-import 'destyle.css'
 import LabelledInput from "./components/LabelledInput";
+import './App.css'
 
 class App extends Component {
     constructor(props) {

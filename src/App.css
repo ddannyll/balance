@@ -38,6 +38,7 @@ body {
 
 .card > h2 {
     font-size: 2rem;
+    padding-top: 1rem;
 }
 
 label input {

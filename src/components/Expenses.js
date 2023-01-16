@@ -89,9 +89,18 @@ class Expenses extends Component {
                     display: false
                 },
                 tooltip: {
+                    titleFont: {
+                        size: 17
+                    },
+                    bodyFont: {
+                        size:17
+                    },
+                    footerFont: {
+                        size: 17
+                    },
                     callbacks: {
                         label: (context) => {
-                            return `$${context.raw}`
+                            return ` $${context.raw}`
                         },
                         footer: (context) => {
                             context = context[0]

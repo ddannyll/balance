@@ -4,11 +4,11 @@ label {
     margin: 1rem 0;
     color: rgba(255, 255, 255, 0.6);
     align-items: center;
+    cursor: auto;
+
 }
 
-label > p {
-    cursor: auto;
-}
+
 
 label input {
     width: min(100%, 300px);
