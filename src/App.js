@@ -66,7 +66,13 @@ class App extends Component {
                     </div>
                     <Income updateIncome = {this.updateIncome}/>
                     <Savings updateSavings = {this.updateSavings}/>
-                    <LabelledInput label='Investments' handleChange={e => this.updateInvestments(Number(e.target.rawValue))}/>
+                    <LabelledInput 
+                        value={this.state.investments} 
+                        label='Investments' 
+                        handleChange={e => this.updateInvestments(Number(e.target.rawValue))}
+                    /> 
+                    {/* Investments can be put in its own component like Savings
+                    however I wanted to expermiment this way as well */}
                     <h2>Expenses</h2>
                     <Expenses updateExpenses={this.updateExpenses}/>
                 </div>

@@ -12,13 +12,15 @@ class Savings extends Component {
     handleChange = (e) => {
         const value = Number(e.target.rawValue)
         this.props.updateSavings(value)
-        window.localStorage.setItem('Savings', JSON.stringify(this.state))
+        this.setState({savings: value}, 
+            () => {window.localStorage.setItem('Savings', JSON.stringify(this.state))}
+        )
     }
 
     render() {
         return (
             <LabelledInput
-                valie={this.state.savings}
+                value={this.state.savings}
                 label={'Savings'}
                 handleChange={this.handleChange}
             />
