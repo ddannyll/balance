@@ -181,7 +181,7 @@ class Expenses extends Component {
                     this.createCustomExpense(selectedGroup, e.target[0].value)
                     e.target[0].value = ''
                 }}>
-                    <input placeholder="Enter Custom Expense" type="text" />
+                    <input placeholder="Enter Custom" type="text"/>
                     <button>Add Expense</button>
                 </form>
             </div>
