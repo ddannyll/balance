@@ -60,6 +60,10 @@ class App extends Component {
             <div className="app">
                 <Summary summary = {this.state}/>
                 <div className="card">
+                    <div className="cardHeader">
+                        <h2>Balance</h2>
+                        <button className='clearBtn' onClick={() => {window.localStorage.clear(); location.reload()}}>Clear All</button>
+                    </div>
                     <Income updateIncome = {this.updateIncome}/>
                     <Savings updateSavings = {this.updateSavings}/>
                     <LabelledInput label='Investments' handleChange={e => this.updateInvestments(Number(e.target.rawValue))}/>

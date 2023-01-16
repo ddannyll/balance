@@ -30,15 +30,35 @@ body {
 
 
 .card {
-    padding: 25px 35px;
+    padding: 25px 50px;
     margin: 50px 0;
     width: min(800px, 90%);
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.card > h2 {
+.card h2 {
     font-size: 2rem;
     padding-top: 1rem;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.clearBtn {
+    align-self: flex-end;
+    width: 150px;
+    padding: 1rem 2rem;
+    text-align: center;
+    border: 2px solid var(--other-color);
+    color: var(--other-color);
+    transition: 0.15s;
+}
+
+.clearBtn:hover {
+    background-color: var(--other-color);
+    color: var(--background);
 }
 
 label input {
