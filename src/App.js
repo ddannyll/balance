@@ -39,7 +39,15 @@ class App extends Component {
         const {income, savings, expenses} = this.state
         this.setState({
             investments: newInvestments,
-            budget: income - savings - newInvestments, expenses
+            budget: income - savings - newInvestments - expenses
+        })
+    }
+
+    updateExpenses = (newExpenses) => {
+        const {income, savings, investments} = this.state
+        this.setState({
+            expenses: newExpenses,
+            budget: income - savings - investments - newExpenses
         })
     }
 
@@ -52,7 +60,7 @@ class App extends Component {
                     <Savings updateSavings = {this.updateSavings}/>
                     <LabelledInput label='Investments' handleChange={e => this.updateInvestments(Number(e.target.rawValue))}/>
 
-                    <Expenses />
+                    <Expenses updateExpenses={this.updateExpenses}/>
                 </div>
             </div>
         )

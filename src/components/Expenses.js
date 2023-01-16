@@ -88,10 +88,13 @@ class Expenses extends Component {
                     ...selectedGroup,
                     items: items.slice(0, itemIndex).concat(
                         {...items[itemIndex], value:updatedValue}
-                    ).concat(items.slice(itemIndex + 1))
+                    ).concat(items.slice(itemIndex + 1)),
+                    value: selectedGroup.value - selectedGroup.items[itemIndex].value + updatedValue
                 }
             ).concat(expenseGroups.slice(selectedGroupIndex + 1))
-        })
+        }, 
+            () => this.props.updateExpenses(this.state.expenseGroups.reduce((prev, curr) => prev + curr.value, 0))
+        )
     }
 
     selectGroup = (index) => {
@@ -119,7 +122,7 @@ class Expenses extends Component {
                     key={`${selectedGroup}:${index}`}
                     label={item.label}
                     value={item.value} 
-                    handleChange={(e) => {this.handleChange(selectedGroup, index, e.target.rawValue)}}
+                    handleChange={(e) => {this.handleChange(selectedGroup, index, Number(e.target.rawValue))}}
                 />
             )
         })
