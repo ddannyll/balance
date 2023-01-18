@@ -78,6 +78,7 @@ form.customExpense input {
     .groupSummary {
         flex-direction: column;
         text-align: center;
+        align-items: center;
     }
 }
 
